@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Clasament Cluburi Karate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Clasamentul pe cluburi VICTORY CUP</h1>
+    <ul id="club-list" class="club-list"></ul>
+  </div>
+
+  <script>
+    const clubs = [
+      { name: "ACS MASAKI FAGARAS", points: 313 },
+      { name: "AS SASORI KARATE", points: 172 },
+      { name: "CS CHIMIA ORAS VICTORIA", points: 163 },
+      { name: "SAIKOU", points: 139 },
+      { name: "CS GIROC CHISODA", points: 66 },
+      { name: "SENTOKI PIATRA NEAMT", points: 24 },
+      { name: "ACS NERA BOZOVICI", points: 13 },
+    ];
+
+    const list = document.getElementById("club-list");
+    clubs.forEach(club => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="club.html?name=${encodeURIComponent(club.name)}">
+          <div class="club-card">
+            <div class="club-name">${club.name.toUpperCase()}</div>
+            <div class="club-points">${club.points} puncte</div>
+          </div>
+        </a>`;
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html>

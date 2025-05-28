@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Sportivi Club</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id="club-title">Sportivi Club</h1>
+    <div id="athletes-list" class="athletes-list"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const clubName = urlParams.get('name');
+
+     const athletes = {
+  "ACS MASAKI FAGARAS": [
+    {
+      "name": "BRETOTEAN SONIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI"
+      ]
+    },
+    {
+      "name": "COVACI EDUARD",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "BACÂREA ELISA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "NECHIFOR-SANDU MAYA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 12-13 ANI 3-1 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "DABIJA GEORGIANA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "VĂSI TUDOR",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "DRAGOTĂ TEODORA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "BRETOTEAN SOFIA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI"
+      ]
+    },
+    {
+      "name": "BERCU DARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "NENU RAUL",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "BĂCILĂ DAVID",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "FINTOIU VALENTINA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 14-16 ANI 3-1 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "BORZEA CASIAN",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "RĂDUCANU IASMIN",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "RADU CARLA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "NANAŞI ARIAN",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "GREAVU LUCA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "MOTOC ALEXANDRA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 14-16 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "MOTOC LUCA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ŞOVĂILĂ ALESSIA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI"
+      ]
+    },
+    {
+      "name": "MOLDOVAN ANIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "BENȚIA VLAD",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "CHIRIL ALEXANDRA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "BUTUCARU DARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 14-16 ANI 3-1 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "LUNGU ILARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "BACÂREA LUKAS",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "MIKLOS SOFIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "DAN MAYA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "MIRCEA DAVID",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "ILIE DIANA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "HAIDĂU IZABELA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "BRUDA ANA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 12-13 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI"
+      ]
+    },
+    {
+      "name": "CIULU CASIANA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "PAVĂL REBECA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI"
+      ]
+    },
+    {
+      "name": "MURGU ARIANNA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "MOLDOVAN SEBASTIAN",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "RĂIBULEȚIU ALEXANDRA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 14-16 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "PETRIŞOR CEZAR",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "RĂDULESCU MATEI",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "RÎBIȚĂ DARIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ŞOVĂILĂ LEONARDO",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "BUGLEA MIHAI",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "MORUZ ANA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 10-11 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 10-11 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ŞINCANU DAVID",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GREAVU OLIVIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "PUIA CRISTIAN",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BĂDILĂ NADIA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GRANCEA ELENA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 14-16 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI"
+      ]
+    },
+    {
+      "name": "LUPU LAURENȚIU",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "RADU LEONARDO",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 14-16 ANI 3-1 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 14-16 ANI"
+      ]
+    },
+    {
+      "name": "PĂTRUȚ DIANA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 12-13 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "MIHAI LEONARDO",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "BALAS EVA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "COVACI SOFIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "DOBOLIȚĂ ALESSIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 14-16 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI"
+      ]
+    },
+    {
+      "name": "POPOV DAVID",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "RUSU RĂZVAN",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "STĂNEASA ALEXANDRU",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "IONIȚĂ PAULA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "ILIE PAUL",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "RĂIBULEȚIU IONUȚ",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 14-16 ANI 3-1 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 14-16 ANI",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "VĂSI ILINCA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GREAVU NATALIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "CERBU ANTONIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "CRIȘAN SOFIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "CLOCA EVELINA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "PUŞCĂ FILIP",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI"
+      ]
+    },
+    {
+      "name": "PUŞCĂ TEODOR",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 14-16 ANI 3-1 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE MASCULIN 14-16 ANI"
+      ]
+    },
+    {
+      "name": "PUȘCĂ FILIP",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "HAIIDĂU IZABELA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "SURDU GEORGE",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    }
+  ],
+  "ACS NERA BOZOVICI": [
+    {
+      "name": "VOIN EDUARD",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "CRAIA RAUL",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "MORARU PATRIK",
+      "results": [
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 14-16 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "JIFCU ANTONIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "RADULEA ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "DRAGAN LEONARDO",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 14-16 ANI 6-4 KYU"
+      ]
+    }
+  ],
+  "AS SASORI KARATE": [
+    {
+      "name": "OPRISAN VLADIMIR",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "VASILE IANIS",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "PRUNA CRISTIAN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI"
+      ]
+    },
+    {
+      "name": "ZANFIR SOFIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "PATRASCU ANTONIO",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI"
+      ]
+    },
+    {
+      "name": "STAN EVA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GAINUSA ALEXANDRU",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "CIRIPOIU SORIN",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 14-16 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "VASILE ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ȘTEFAN FILIP",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "VASILE VALENTIN",
+      "results": [
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "MIHALCEA INGRID",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "SORESCU TEOFIL",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "CARABANEANU EDUARD",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 12-13 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 14-16 ANI",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 12-13 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "KIRCA RARES",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GEORGESCU ADRIAN",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "CARJAN TEODORA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "ANDREI MARIAN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 12-13 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 14-16 ANI"
+      ]
+    },
+    {
+      "name": "TANASE ALECSIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 12-13 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ABUR EVA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "DRAGOMIR ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 6-7 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "PARVANA STEFANIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "CORNEANU DANIEL",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI"
+      ]
+    },
+    {
+      "name": "DINITA TEODOR",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "DIMA ADRIANA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 12-13 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "MIHAI ZIAD",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "RADU IRINA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 12-13 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI"
+      ]
+    },
+    {
+      "name": "BUSUIOC CRISTINA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "STEFAN NICHOLAS",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "DINITA ERIC",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "PASARE STEFAN",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "PETRACHE TEODORA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "MITRESCU ANISSIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI"
+      ]
+    },
+    {
+      "name": "CORBU MARIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI"
+      ]
+    },
+    {
+      "name": "TRANDAFIR TUDOR",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 6-7 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "SORESCU MIRA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 12-13 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI"
+      ]
+    },
+    {
+      "name": "ISTRATE ALEXANDRU",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GEREA MAITE",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "ZABAVA DARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 12-13 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI"
+      ]
+    },
+    {
+      "name": "GRIGORE MARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "BUCEANU ISABELLA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "COMAN DENIS",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "CALIN DARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE FEMININ 12-13 ANI"
+      ]
+    },
+    {
+      "name": "TONCU ERIC",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 6-7 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "BUCEANU CALIN",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "IONIȚĂ ZIAN",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "OPREA DAVID",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "RADULESCU KATHERINE",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 6-4 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 8-9 ANI"
+      ]
+    },
+    {
+      "name": "DUMITRU EDUARD",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 12-13 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE MASCULIN 14-16 ANI"
+      ]
+    },
+    {
+      "name": "NEAGU YANIS",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 12-13 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "BRAUVERDE VLAD",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "MARIN ANDREI",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 12-13 ANI 6-4 KYU"
+      ]
+    }
+  ],
+  "CS CHIMIA ORAȘ VICTORIA": [
+    {
+      "name": "LUPSOR MATEI VLAD",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "CÂRSTEA VICTORIA MARTINA",
+      "results": [
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BLEOACA SABIN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 12-13 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 12-13 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GREBLEA CASIAN ALEXANDRU",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "ANDRIES DENIS ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "NAGHI ANNE MARIE",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BELTECHI TEONA VICTORIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 14-16 ANI 3-1 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "BERCU DARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "ZAHARIA NICOLAS",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BLENDEA PAUL IOAN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "CIMPOER BEATRICE ILEANA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI"
+      ]
+    },
+    {
+      "name": "CIMPOERU BEATRICE ILEANA",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "BIRSAN EMA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "MUNTEAN MAIA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "SMĂDU ANDREI",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "CRISTIAN DAVID",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 14-16 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "ZAMFIR ALEXANDRU IOAN",
+      "results": [
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "MIKLOS EMA TEODORA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "OLARU DARIA GABRIELA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 10-11 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "CHIRIL ALEXANDRA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "ZAMFIR ANAMARIA CLAUDIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI"
+      ]
+    },
+    {
+      "name": "GLIGA NADIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "COSTEA CODIN",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "BÂRSAN EMA",
+      "results": [
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "ZAHARIA NOCOLAS",
+      "results": [
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "CIMPOERU PATRICIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "ORDACEA ALEXANDRA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "IOCAILIUC MIHAI",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "LAZAR ANA MARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "POL DAVID ANDREAS",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "CHIRILĂ ALAEXANDRA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "RÎBIȚĂ DARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "BĂLAȘ DENIS",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "TOMESCU ALEXANDRU",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "COMAN MADALINA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "GRAD TIMEEA MARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 14-16 ANI 3-1 KYU",
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 14-16 ANI",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "MIKLOS SOFIA ANTONIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ZAMFIR CLAUDIA ANAMARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 12-13 ANI 3-1 KYU",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE FEMININ 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "CRIŞAN SOFIA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA ECHIPE FEMININ 10-11 ANI"
+      ]
+    },
+    {
+      "name": "IOSIPESCU MIA-SOFIA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GREBLEA DIANA MARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "STRAOANU SONIA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BALAS EVA MARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "COSTE CODIN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 8-9 ANI"
+      ]
+    },
+    {
+      "name": "SOFANEA SARA STEFANIA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "ADRIES DENIS ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI"
+      ]
+    },
+    {
+      "name": "BALAS LUCA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "STRAOANU ALESSIA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "IOSIPESCU MIHNEA-STEFAN",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU",
+        "LOCUL 3 CATEGORIA KATA ECHIPE MASCULIN 10-11 ANI",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "BĂLAȘ DARIUS",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GAVRIL COSTIN ALEXANDRU",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 12-13 ANI 8-7 KYU"
+      ]
+    }
+  ],
+  "CS GIROC CHISODA": [
+    {
+      "name": "POPA ANDREI",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "COCA LUCA",
+      "results": [
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "COCA ALEXANDRU",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "OLARIU RARES",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "AMZA VLAD",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "OANCEA ALEXANDRA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "CIRIMPEI DAVID",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "GLAVAN DAMIAN",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "DRUCIOC ALEXANDRA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "POPESCU-BUSAN RAUL",
+      "results": [
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 12-13 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "PETREA DENIS",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "HINDA IANIS",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "POPESCU-BUSAN ALBERT",
+      "results": [
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "CHETRINESCU SORANA",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 10-11 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "GAVRILA ALEXANDRU",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ALBU MATEI",
+      "results": [
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "ANGHELESCU MARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "STIUBEA RADU",
+      "results": [
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "MURGAN DAVID",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 6-4 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "URSU MATEI",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 14-16 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "VASILESCU IONUT",
+      "results": [
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 12-13 ANI 3-1 KYU"
+      ]
+    },
+    {
+      "name": "AMZA MEDEEA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "ANGHEL IRINA",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "OANCEA SEBASTIAN",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 6-4 KYU"
+      ]
+    }
+  ],
+  "SAIKOU": [
+    {
+      "name": "HABA TAMARA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GANEA ROBERT GABRIEL",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "STOIAN EVA ANA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "HABA ARTHUR",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "MITROIU ANA MIHAELA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 6-7 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "RADU STEFAN",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "DINCA LUCA ANDREI",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "RISTEA REBECA MARIA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 10-11 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 10-11 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "TALA LUCAS MATEI",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "Muresean Darius Icaov",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GEAMAN CATALINA ELENA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 10-11 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 10-11 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "MANICA DENISA MARIANA GABRIELA",
+      "results": [
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 6-7 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GHITA REBECA IOANA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "TAPOSU MATEI MIHAI",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "GHINIA RARES DUMITRU",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "TUDORACHE MIRUNA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 8-9 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "RADUTA GIB VLAD ALEXANDRU",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "BUZEA IOAN ALEXANDRU",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "SIMON CRISTIAN",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 6-7 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 6-7 ANI 10-9 KYU"
+      ]
+    },
+    {
+      "name": "MURESEAN DARIUS IACOV",
+      "results": [
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BURLACU EMA ALEXIA",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "ODAGIU MATEI STEFAN",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "PADURARIU RAZVAN MIHAI",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "VORNICESEI ILINCA MARIA",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU FEMININ 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA FEMININ 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "BERCEA RADU STEFAN",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 2 CATEGORIA MAKYWARA MASCULIN 8-9 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA KATA MASCULIN 8-9 ANI 10-9 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "IONITA VLAD",
+      "results": [
+        "LOCUL 1 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "MITROIU RARES ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU MASCULIN 10-11 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 10-11 ANI 10-8 KYU"
+      ]
+    },
+    {
+      "name": "GOLITA DAVID",
+      "results": [
+        "LOCUL 2 CATEGORIA TRASEU MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 1 CATEGORIA MAKYWARA MASCULIN 4-6 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    }
+  ],
+  "SENTOKI PIATRA NEAMT": [
+    {
+      "name": "CIOBANU ADRIAN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 8-9 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "APOSTOL ANASTASIA",
+      "results": [
+        "LOCUL 2 CATEGORIA KATA FEMININ 10-11 ANI 8-7 KYU",
+        "LOCUL 1 CATEGORIA KUMITE FEMININ 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "APOSTOL RAISA",
+      "results": [
+        "LOCUL 3 CATEGORIA TRASEU FEMININ 8-9 ANI 10-8 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 8-9 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 8-9 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "TOADER DAVID",
+      "results": [
+        "LOCUL 1 CATEGORIA KATA MASCULIN 10-11 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 10-11 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "AFLOREI CRISTIAN",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA MASCULIN 12-13 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE MASCULIN 12-13 ANI 8-7 KYU"
+      ]
+    },
+    {
+      "name": "RADU DAFINA",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA FEMININ 4-6 ANI 10-9 KYU",
+        "LOCUL 3 CATEGORIA KATA FEMININ 12-13 ANI 8-7 KYU",
+        "LOCUL 3 CATEGORIA KUMITE FEMININ 12-13 ANI 6-4 KYU"
+      ]
+    },
+    {
+      "name": "LAIU ANDREI",
+      "results": [
+        "LOCUL 3 CATEGORIA KATA MASCULIN 6-7 ANI 8-7 KYU",
+        "LOCUL 2 CATEGORIA KUMITE MASCULIN 8-9 ANI 8-7 KYU"
+      ]
+    }
+  ]
+};
+
+const title = document.getElementById("club-title");
+const list = document.getElementById("athletes-list");
+
+title.innerText = `Sportivi club ${clubName.toUpperCase()}`;
+
+if (athletes[clubName] && athletes[clubName].length > 0) {
+  athletes[clubName].forEach(athlete => {
+    const card = document.createElement("div");
+    card.className = "athlete-card";
+
+    // Generam lista cu rezultate + medalie
+    const results = athlete.results.map(result => {
+      let icon = "🎖️"; // default
+      if (result.startsWith("LOCUL 1")) icon = "🥇";
+      else if (result.startsWith("LOCUL 2")) icon = "🥈";
+      else if (result.startsWith("LOCUL 3")) icon = "🥉";
+      return `<li>${icon} ${result}</li>`;
+    }).join("");
+
+    // Completam cardul cu HTML
+    card.innerHTML = `
+      <div class="athlete-header">
+        <div class="athlete-icon"></div>
+        <h2>${athlete.name}</h2>
+      </div>
+      <div class="results-wrapper">
+        <ul class="results-list">
+          ${results}
+        </ul>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+} else {
+  list.innerHTML = `
+    <div class="athlete-card no-athletes">
+      Nu exista sportivi inregistrati pentru acest club.
+    </div>
+  `;
+}
+</script>
+</body>
+</html>

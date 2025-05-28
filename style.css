@@ -1,0 +1,152 @@
+/* Reset + font */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #2f2f2f, #1a1a1a);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px #000;
+}
+
+/* LISTA CLUBURI */
+.club-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.club-list li a {
+  text-decoration: none;
+  display: block;
+}
+
+.club-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 170, 255, 0.3);
+  border-radius: 16px;
+  padding: 20px 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.club-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 170, 255, 0.3);
+}
+
+.club-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.club-points {
+  font-size: 1rem;
+  color: #00ccff;
+}
+
+/* LISTA SPORTIVI */
+.athletes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.athlete-card {
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.6), rgba(40, 40, 40, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 5px solid #00aaff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 170, 255, 0.15);
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+.athlete-card:hover {
+  transform: translateY(-2px);
+}
+
+.athlete-card h2 {
+  font-size: 1.1rem;
+  color: #00c3ff;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.athlete-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.athlete-card li {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #cdefff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.no-athletes {
+  background: rgba(255, 0, 0, 0.15);
+  border-left: 5px solid #ff4b4b;
+  font-weight: bold;
+  color: #fff;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .club-card,
+  .athlete-card {
+    padding: 16px;
+  }
+
+  .club-name {
+    font-size: 1.1rem;
+  }
+
+  .club-points,
+  .athlete-card li {
+    font-size: 0.9rem;
+  }
+
+  .athlete-card h2 {
+    font-size: 1rem;
+  }
+}
